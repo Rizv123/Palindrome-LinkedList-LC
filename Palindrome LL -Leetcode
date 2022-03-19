@@ -1,0 +1,63 @@
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+    
+    // convert linked list into vector and apply simple approach for checking palindrome
+        vector< int> v ;
+       ListNode* dummy = head ;
+        while(dummy!=NULL)
+        {
+            v.push_back(dummy->val);
+            dummy = dummy->next ;
+        }
+   //     int n = v.size() ;
+   //     for( int i = 0 ; i<n/2; i++)
+   //     { 
+   //       //  if(i>=n/2) return true ;
+   //         if(v[i]!=v[n-i-1]) return false ;     
+   // }
+   //     return true ;
+        
+        // two pointer approach 
+        int n = v.size();
+        int i = 0 , j= n-1 ;
+        while(i<j)
+        {
+            if(v[i]!=v[j]) return false ;
+            i++  ; 
+            j-- ;
+        }
+        return true ;
+    }
+};
+      */
+
+
+
+// Stack & Queue Approach   TC- O(N) 
+//                          SC-O(N)
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        stack < int > st ;
+        queue < int > q ;
+        ListNode* dummy = head ;
+        while(dummy!=NULL)
+        {
+            st.push(dummy->val) ;
+            q.push(dummy->val) ;
+            dummy = dummy->next ;
+        }
+        while(!st.empty() && !q.empty())
+        {
+             int s1 = st.top() ;
+             st.pop() ;
+            int q1 = q.front() ;
+            q.pop();
+            if(s1 != q1 )return false ;
+            
+        }
+        return true ;
+    }
+};
+
